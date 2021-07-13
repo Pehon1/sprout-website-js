@@ -6,9 +6,6 @@ localizedCountries: { 'sg': "Singapore"},
 preferredCountries: ['sg', 'in']
 });
 
-const elements = 
-const config = 
-
 const observer = new MutationObserver(function(mutationList, observer) { 
     for(const mutation of mutationList) { 
         if(mutation.oldValue == null) {
