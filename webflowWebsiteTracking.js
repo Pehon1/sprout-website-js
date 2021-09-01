@@ -1,11 +1,3 @@
-
-var input = document.querySelector("#phone");
-var iti = window.intlTelInput(input, {
-utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/js/utils.js",
-localizedCountries: { 'sg': "Singapore"},
-preferredCountries: ['sg', 'in']
-});
-
 const observer = new MutationObserver(function(mutationList, observer) { 
     for(const mutation of mutationList) { 
         if(mutation.oldValue == null) {
@@ -19,12 +11,8 @@ Array.from(document.getElementsByClassName("modal-wrapper")).forEach((element) =
 })
 
 $("#email-form").submit(function(e) {
-	if (iti.isValidNumber()) {
-		$("#phone").val(iti.getNumber());
-    }
     analytics.identify($('#email').val(), {
 		"first_name": $('#first_name').val(),
-		"phone" : $('#phone').val(),
 		"email": $('#email').val()
 	});
     analytics.track("Contact Form Submitted", {
