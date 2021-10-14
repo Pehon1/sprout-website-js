@@ -66,21 +66,23 @@ $("#btn_search_ssic").click(function () {
         var total = 0;
         var expression = new RegExp(ssic_code, "i");
         $.each(dataSSIC.results, function (key, value) {
-            if (value.ssic.search(expression) != -1 || value.title.search(expression) != -1) {
-                var replaceD = "<span class='highlight'>" + ssic_code + "</span>";
-                var text_filter = new RegExp(ssic_code, "ig");
+            if (value.ssic.length === 5) {
+                if (value.ssic.search(expression) != -1 || value.title.search(expression) != -1) {
+                    var replaceD = "<span class='highlight'>" + ssic_code + "</span>";
+                    var text_filter = new RegExp(ssic_code, "ig");
 
-                var ssic_highlight = value.ssic;
-                ssic_highlight = ssic_highlight.replace(text_filter, replaceD);
+                    var ssic_highlight = value.ssic;
+                    ssic_highlight = ssic_highlight.replace(text_filter, replaceD);
 
-                var title_highlight = value.title;
-                title_highlight = title_highlight.replace(text_filter, replaceD);
+                    var title_highlight = value.title;
+                    title_highlight = title_highlight.replace(text_filter, replaceD);
 
-                html += '<tr>';
-                html += '<td class="text-center" style="width: 200px;">' + ssic_highlight + '</td>';
-                html += '<td>' + title_highlight + '</td>';
-                html += '</tr>';
-                total = total + 1;
+                    html += '<tr>';
+                    html += '<td class="text-center" style="width: 200px;">' + ssic_highlight + '</td>';
+                    html += '<td>' + title_highlight + '</td>';
+                    html += '</tr>';
+                    total = total + 1;
+                }
             }
         });
 
