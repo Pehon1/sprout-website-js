@@ -49,14 +49,14 @@ $("#btn_search_ssic").click(function () {
         html += '}';
 
         html += '.highlight {';
-        html += 'background-color: yellow;';
+        html += 'background-color: #fdc202;';
         html += '}';
         html += '</style>'
 
         html += '<h3 id="result_text" class="heading-10" style=""></h3>';
         html += '<table>';
         html += '<thead>';
-        html += '<tr style="background-color: #1ea59a!important;color:#ffffff;">';
+        html += '<tr style="background-color: #4dc7ba!important;color:#ffffff;">';
         html += '<th class="text-center" style="width: 200px;">SSIC ' + dataSSIC.year + '</th>';
         html += '<th>INDUSTRY</th>';
         html += '</tr>';
