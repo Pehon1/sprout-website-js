@@ -108,12 +108,14 @@ function createTable(results) {
     var entity_type = '';
     $.each(results, function (key, value) {
         // if (value.ssic.search(expression) != -1 || value.title.search(expression) != -1) {
-        var replaceD = "<span class='highlight'>" + $('#company_name').val() + "</span>";
-        var text_filter = new RegExp($('#company_name').val(), "ig");
-        var uen_highlight = value.uen;
+        var text_filter = $('#company_name').val().toUpperCase();
+        var replaceD = "<span class='highlight'>" + text_filter + "</span>";
+        // var replaceD = "<span class='highlight'>" + $('#company_name').val().toUpperCase() + "</span>";
+        // var text_filter = new RegExp($('#company_name').val(), "ig");
+        var uen_highlight = value.uen.toUpperCase();
         uen_highlight = uen_highlight.replace(text_filter, replaceD);
 
-        var entity_name_highlight = value.entity_name;
+        var entity_name_highlight = value.entity_name.toUpperCase();
         entity_name_highlight = entity_name_highlight.replace(text_filter, replaceD);
         if (value.uen_status === 'R') {
             uen_status = 'Registered';
