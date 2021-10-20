@@ -58,7 +58,7 @@ $("#btn_search_ssic").click(function () {
         html += '<thead>';
         html += '<tr style="background-color: #4dc7ba!important;color:#ffffff;">';
         html += '<th class="text-center" style="width: 200px;">SSIC ' + dataSSIC.year + '</th>';
-        html += '<th>INDUSTRY</th>';
+        html += '<th class="text-center">INDUSTRY</th>';
         html += '</tr>';
         html += '</thead>';
         html += '<tbody>';

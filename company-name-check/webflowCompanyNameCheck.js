@@ -87,8 +87,8 @@ function createTable(results) {
     html += '<thead>';
     html += '<tr style="background-color: #4dc7ba!important;color:#ffffff;">';
     html += '<th class="text-center" style="width: 150px;">UEN</th>';
-    html += '<th>Name</th>';
-    html += '<th class="text-center" style="width: 150px;">Type</th>';
+    html += '<th class="text-center">NAME</th>';
+    html += '<th class="text-center" style="width: 150px;">TYPE</th>';
     html += '<th class="text-center" style="width: 150px;">DATE OF ISSUE</th>';
     html += '<th class="text-center" style="width: 150px;">UEN STATUS</th>';
     html += '</tr>';
