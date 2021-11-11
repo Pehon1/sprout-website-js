@@ -1,3 +1,11 @@
+$("#ssic_code").keyup(function () {
+    var e = e || window.event;
+    var keycode = e.which || e.keyCode;
+    if (keycode !== 13 || (e.target || e.srcElement).value == '')
+        return false;
+    $("#btn_search_ssic").trigger('click');
+})
+
 $("#btn_search_ssic").click(function () {
     var ssic_code = $('#ssic_code').val();
     if (ssic_code === '') {
