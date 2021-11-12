@@ -1,3 +1,11 @@
+$("#company_name").keyup(function () {
+    var e = e || window.event;
+    var keycode = e.which || e.keyCode;
+    if (keycode !== 13 || (e.target || e.srcElement).value == '')
+        return false;
+    $("#btn_search_cnc").trigger('click');
+})
+
 $("#btn_search_cnc").click(function () {
     var company_name = $('#company_name').val();
     if (company_name === '') {
@@ -7,6 +15,8 @@ $("#btn_search_cnc").click(function () {
         checkCompany(0);
     }
 });
+
+
 function checkCompany(offset = 0) {
     var query = JSON.stringify({ "entity_name": $('#company_name').val() })
     var url = 'https://data.gov.sg/api/action/datastore_search?resource_id=5ab68aac-91f6-4f39-9b21-698610bdf3f7&limit=100&offset=' + offset + '&q=' + query
