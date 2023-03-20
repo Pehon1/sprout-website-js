@@ -39,6 +39,15 @@ function checkCompany(offset = 0) {
 }
 function createTable(results, query) {
     results.sort((a, b) => similarity(a.entity_name, query) - similarity(b.entity_name, query));
+    results.sort((a, b) => {
+      if (a.uen_status === "R" && b.uen_status !== "R") {
+        return -1;
+      } else if (a.uen_status !== "D" && b.uen_status === "D") {
+        return 1;
+      } else {
+        return new Date(b.uen_issue_date) - new Date(a.uen_issue_date);
+      }
+    });
     var html = '';
     html += '<style>';
     html += 'table {';
