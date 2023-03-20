@@ -32,12 +32,13 @@ function checkCompany(offset = 0) {
                 checkCompany(offset + 100)
             } else {
                 $isFetching = false;
-                createTable([]);
+                createTable($datalist, query);
             }
         }
     });
 }
-function createTable(results) {
+function createTable(results, query) {
+    results.sort((a, b) => similarity(a.entity_name, query) - similarity(b.entity_name, query));
     var html = '';
     html += '<style>';
     html += 'table {';
@@ -159,4 +160,63 @@ function createTable(results) {
     } else {
         $('#results_cnc').html('<h3 id="result_text" class="heading-10" style="">A total of 0 matches were found.</h3>');
     }
+}
+
+function similarity(str1, str2) {
+  return 1 - stringDistance(str1, str2) / Math.max(str1.length, str2.length);
+}
+
+
+function stringDistance(str1, str2) {
+  const len1 = str1.length;
+  const len2 = str2.length;
+  const matchDistance = Math.floor(Math.max(len1, len2) / 2) - 1;
+  const matches1 = new Array(len1).fill(false);
+  const matches2 = new Array(len2).fill(false);
+
+  let matches = 0;
+  for (let i = 0; i < len1; i++) {
+    const start = Math.max(0, i - matchDistance);
+    const end = Math.min(len2, i + matchDistance + 1);
+    for (let j = start; j < end; j++) {
+      if (!matches2[j] && str1[i] === str2[j]) {
+        matches1[i] = true;
+        matches2[j] = true;
+        matches++;
+        break;
+      }
+    }
+  }
+
+  if (matches === 0) {
+    return 0;
+  }
+
+  let transpositions = 0;
+  let k = 0;
+  for (let i = 0; i < len1; i++) {
+    if (matches1[i]) {
+      while (!matches2[k]) {
+        k++;
+      }
+      if (str1[i] !== str2[k]) {
+        transpositions++;
+      }
+      k++;
+    }
+  }
+
+  const prefixLength = Math.min(4, Math.max(0, len1 - 1));
+  let commonPrefix = 0;
+  for (let i = 0; i < prefixLength; i++) {
+    if (str1[i] === str2[i]) {
+      commonPrefix++;
+    } else {
+      break;
+    }
+  }
+
+  const jaroDistance = (matches / len1 + matches / len2 + (matches - transpositions / 2) / matches) / 3;
+  const winklerDistance = jaroDistance + commonPrefix * 0.1 * (1 - jaroDistance);
+  return winklerDistance;
 }
