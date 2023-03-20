@@ -32,7 +32,7 @@ function checkCompany(offset = 0) {
                 checkCompany(offset + 100)
             } else {
                 $isFetching = false;
-                createTable($datalist);
+                createTable([]);
             }
         }
     });
