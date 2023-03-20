@@ -48,9 +48,9 @@ function createTable(results, query) {
       }
 
       // sort by registered status and then by descending uen_issue_date
-      if (a.uen_status === "Registered" && b.uen_status !== "Registered") {
+      if (a.uen_status === "R" && b.uen_status !== "R") {
         return -1;
-      } else if (a.uen_status !== "Registered" && b.uen_status === "Registered") {
+      } else if (a.uen_status !== "R" && b.uen_status === "R") {
         return 1;
       } else {
         return new Date(b.uen_issue_date) - new Date(a.uen_issue_date);
