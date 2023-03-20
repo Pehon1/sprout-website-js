@@ -38,11 +38,19 @@ function checkCompany(offset = 0) {
     });
 }
 function createTable(results, query) {
-    results.sort((a, b) => similarity(a.entity_name, query) - similarity(b.entity_name, query));
     results.sort((a, b) => {
-      if (a.uen_status === "R" && b.uen_status !== "R") {
+      const similarityA = similarity(a.entity_name, query);
+      const similarityB = similarity(b.entity_name, query);
+
+      // sort by ascending similarity score difference
+      if (similarityA !== similarityB) {
+        return similarityA - similarityB;
+      }
+
+      // sort by registered status and then by descending uen_issue_date
+      if (a.uen_status === "Registered" && b.uen_status !== "Registered") {
         return -1;
-      } else if (a.uen_status !== "D" && b.uen_status === "D") {
+      } else if (a.uen_status !== "Registered" && b.uen_status === "Registered") {
         return 1;
       } else {
         return new Date(b.uen_issue_date) - new Date(a.uen_issue_date);
